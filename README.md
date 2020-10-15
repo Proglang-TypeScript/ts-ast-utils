@@ -1,6 +1,6 @@
 # ts-ast-utils
 
-A simpler & friendlier way to interact with the Typescript AST.
+A simpler & friendlier way to traverse the Typescript AST.
 
 ## visitAllChildren
 

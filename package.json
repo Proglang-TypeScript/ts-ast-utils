@@ -1,7 +1,7 @@
 {
   "name": "ts-ast-utils",
   "version": "1.0.0",
-  "description": "Provides a simpler way to interact with the Typescript AST",
+  "description": "Utilities for TypeScript AST traversals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -25,7 +25,7 @@
     "ast"
   ],
   "author": "fcristiani",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "devDependencies": {
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
