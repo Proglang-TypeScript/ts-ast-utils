@@ -1,4 +1,4 @@
-import { visitAllChildren, createFromString } from '../index';
+import { visit, createFromString } from '../index';
 import ts from 'typescript';
 
 const declarationFile = `
@@ -19,7 +19,7 @@ export interface Baz {
 const ast = createFromString(declarationFile);
 
 const interfaces: { name: string; members: string[] }[] = [];
-visitAllChildren(ast, {
+visit(ast, {
   [ts.SyntaxKind.InterfaceDeclaration]: (interfaceDeclaration) => {
     interfaces.push({
       name: interfaceDeclaration.name.escapedText.toString(),
