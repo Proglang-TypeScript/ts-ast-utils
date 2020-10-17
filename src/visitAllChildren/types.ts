@@ -16,4 +16,5 @@ type VisitorsWithGenericNodeType = {
 
 type VisitorsWithSpecificNodeTypes = {
   [ts.SyntaxKind.InterfaceDeclaration]?: VisitorFunction<ts.InterfaceDeclaration>;
+  [ts.SyntaxKind.ArrayType]?: VisitorFunction<ts.ArrayTypeNode>;
 };

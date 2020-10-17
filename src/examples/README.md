@@ -5,11 +5,11 @@ Clone this repo and run `npm install`.
 Running an example:
 
 ```bash
-$ npm run script -- [PATH_TO_EXAMPLE]
+$ npm run script -s -- [PATH_TO_EXAMPLE]
 ```
 
 Example for `printInterfaces`:
 
 ```
-$ npm run script -- src/examples/printInterfaces.ts
+$ npm run script -s -- src/examples/printInterfaces.ts
 ```

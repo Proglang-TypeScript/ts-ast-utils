@@ -19,10 +19,9 @@ visitAllChildren(ast, {
   [ts.SyntaxKind.QuestionToken]: () => {
     tags.add('question-token');
   },
-  [ts.SyntaxKind.ArrayType]: (node: ts.Node) => {
+  [ts.SyntaxKind.ArrayType]: (node) => {
     tags.add('array');
-    (node as ts.ArrayTypeNode).elementType.kind === ts.SyntaxKind.NumberKeyword &&
-      tags.add('array-number');
+    node.elementType.kind === ts.SyntaxKind.NumberKeyword && tags.add('array-number');
   },
 });
 
