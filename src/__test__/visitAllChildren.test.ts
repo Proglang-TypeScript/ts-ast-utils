@@ -1,6 +1,7 @@
 import { createFromString } from '../createFromString';
-import { visitAllChildren, VisitorsMap } from '../visitAllChildren';
+import { visitAllChildren } from '../visitAllChildren';
 import ts from 'typescript';
+import { VisitorsMap } from '../visitAllChildren/types';
 
 describe('visitAllChildren', () => {
   it('Runs the visitor on all children', () => {
