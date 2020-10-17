@@ -23,9 +23,7 @@ visitAllChildren(ast, {
   [ts.SyntaxKind.InterfaceDeclaration]: (interfaceDeclaration) => {
     interfaces.push({
       name: interfaceDeclaration.name.escapedText.toString(),
-      members: interfaceDeclaration.members.map((m) =>
-        (m.name as ts.Identifier).escapedText.toString(),
-      ),
+      members: interfaceDeclaration.members.map((m) => m.name?.getText() || ''),
     });
   },
 });

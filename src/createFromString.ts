@@ -5,7 +5,7 @@ export function createFromString(content: string): ts.SourceFile {
     '',
     content,
     ts.ScriptTarget.Latest,
-    /*setParentNodes*/ false,
+    /*setParentNodes*/ true,
     ts.ScriptKind.TS,
   );
 }
