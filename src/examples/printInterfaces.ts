@@ -30,6 +30,7 @@ visitAllChildren(ast, {
   },
 });
 
+// eslint-disable-next-line no-console
 console.log(
   `Declared interfaces: ${interfaces
     .map((i) => `${i.name}: [${i.members.join(', ')}]`)

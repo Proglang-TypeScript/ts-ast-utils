@@ -14,4 +14,5 @@ visitAllChildren(ast, {
   },
 });
 
+// eslint-disable-next-line no-console
 console.log(`Number of nodes: ${numberOfNodes}`);

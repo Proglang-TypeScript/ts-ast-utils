@@ -15,6 +15,7 @@ const getVisitor = (visitors: VisitorsMap) => {
     }
 
     const syntaxKindVisitor = visitors[node.kind];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     syntaxKindVisitor && syntaxKindVisitor(node as any);
 
     ts.forEachChild(node, visit);
