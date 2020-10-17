@@ -20,9 +20,7 @@ const ast = createFromString(declarationFile);
 
 const interfaces: { name: string; members: string[] }[] = [];
 visitAllChildren(ast, {
-  [ts.SyntaxKind.InterfaceDeclaration]: (node: ts.Node) => {
-    const interfaceDeclaration = node as ts.InterfaceDeclaration;
-
+  [ts.SyntaxKind.InterfaceDeclaration]: (interfaceDeclaration) => {
     interfaces.push({
       name: interfaceDeclaration.name.escapedText.toString(),
       members: interfaceDeclaration.members.map((m) =>

@@ -1,11 +1,5 @@
-import ts, { visitFunctionBody } from 'typescript';
-
-export type VisitorFunction = (node: ts.Node) => unknown;
-export type VisitorsMap = {
-  [k in ts.SyntaxKind]?: VisitorFunction;
-} & {
-  all?: VisitorFunction;
-};
+import ts from 'typescript';
+import { VisitorsMap } from './types';
 
 export function visitAllChildren(rootNode: ts.Node, visitors: VisitorsMap) {
   ts.forEachChild(rootNode, getVisitor(visitors));
@@ -16,8 +10,12 @@ const getVisitor = (visitors: VisitorsMap) => {
     const allNodesVisitor = visitors.all;
     allNodesVisitor && allNodesVisitor(node);
 
+    if (ts.isInterfaceDeclaration(node)) {
+      node;
+    }
+
     const syntaxKindVisitor = visitors[node.kind];
-    syntaxKindVisitor && syntaxKindVisitor(node);
+    syntaxKindVisitor && syntaxKindVisitor(node as any);
 
     ts.forEachChild(node, visit);
   };
