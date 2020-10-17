@@ -10,10 +10,6 @@ const getVisitor = (visitors: VisitorsMap) => {
     const allNodesVisitor = visitors.all;
     allNodesVisitor && allNodesVisitor(node);
 
-    if (ts.isInterfaceDeclaration(node)) {
-      node;
-    }
-
     const syntaxKindVisitor = visitors[node.kind];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     syntaxKindVisitor && syntaxKindVisitor(node as any);
