@@ -1,4 +1,4 @@
-import ts, { visitFunctionBody } from 'typescript';
+import ts from 'typescript';
 
 export type VisitorFunction = (node: ts.Node) => unknown;
 export type VisitorsMap = {
