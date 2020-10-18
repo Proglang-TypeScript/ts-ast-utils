@@ -25,6 +25,8 @@ accept(ast, {
       name: interfaceDeclaration.name.escapedText.toString(),
       members: interfaceDeclaration.members.map((m) => m.name?.getText() || ''),
     });
+
+    return { traverse: false };
   },
 });
 
