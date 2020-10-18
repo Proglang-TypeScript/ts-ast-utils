@@ -11,20 +11,17 @@ export interface Foo {
 
 const ast = createFromString(declarationFile);
 
-const post = (node: ts.Node): number => {
-  const children = node.getChildren();
-  if (children.length === 0) {
-    return 1;
-  }
-
-  const depthsOfChildren = children.map((child) => +post(child));
-
-  return 1 + Math.max(...depthsOfChildren);
-};
-
 const depthVisitor = {
-  post,
-  traverse: () => undefined,
+  post: (node: ts.Node): number => {
+    const children = node.getChildren();
+    if (children.length === 0) {
+      return 1;
+    }
+
+    const depthsOfChildren = children.map((child) => +(accept(child, depthVisitor) || 0));
+
+    return 1 + Math.max(...depthsOfChildren);
+  },
 };
 
 const depth = accept(ast, depthVisitor);
