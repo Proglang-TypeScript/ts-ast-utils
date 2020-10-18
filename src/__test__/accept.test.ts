@@ -8,13 +8,13 @@ describe('visitAllChildren', () => {
     const ast = createFromString('export function foo(a: string): number;');
 
     let nodes = 0;
-    const visitorsMap: Visitor = {
+    const visitor: Visitor = {
       pre: () => {
         nodes++;
       },
     };
 
-    accept(ast, visitorsMap);
+    accept(ast, visitor);
 
     expect(nodes).toBe(9);
   });
@@ -23,13 +23,13 @@ describe('visitAllChildren', () => {
     const ast = createFromString('export function foo(a: string): number;');
 
     const tags = new Set<string>();
-    const visitorsMap: Visitor = {
+    const visitor: Visitor = {
       [ts.SyntaxKind.StringKeyword]: () => {
         tags.add('string');
       },
     };
 
-    accept(ast, visitorsMap);
+    accept(ast, visitor);
 
     expect(tags.has('string')).toBe(true);
   });
