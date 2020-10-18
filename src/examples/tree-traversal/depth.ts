@@ -1,4 +1,4 @@
-import { accept, createFromString } from '../index';
+import { accept, createFromString } from '../../index';
 import ts from 'typescript';
 
 const declarationFile = `
@@ -11,17 +11,19 @@ export interface Foo {
 
 const ast = createFromString(declarationFile);
 
+const post = (node: ts.Node): number => {
+  const children = node.getChildren();
+  if (children.length === 0) {
+    return 1;
+  }
+
+  const depthsOfChildren = children.map((child) => +post(child));
+
+  return 1 + Math.max(...depthsOfChildren);
+};
+
 const depthVisitor = {
-  post: (node: ts.Node): number => {
-    const children = node.getChildren();
-    if (children.length === 0) {
-      return 1;
-    }
-
-    const depthsOfChildren = children.map((child) => +(accept(child, depthVisitor) || 0));
-
-    return 1 + Math.max(...depthsOfChildren);
-  },
+  post,
   traverse: () => undefined,
 };
 
