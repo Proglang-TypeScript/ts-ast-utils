@@ -1,4 +1,4 @@
-import { visit, createFromString } from '../index';
+import { accept, createFromString } from '../index';
 
 const declarationFile = `
 export function foo(a: string): number;
@@ -8,7 +8,7 @@ export function bar(b: string): number;
 const ast = createFromString(declarationFile);
 
 let numberOfNodes = 0;
-visit(ast, {
+accept(ast, {
   pre: () => {
     numberOfNodes++;
   },

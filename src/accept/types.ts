@@ -1,19 +1,24 @@
 import ts from 'typescript';
 
 export type VisitorFunction = (node: ts.Node) => unknown;
+export type VisitorPostFunction<R = unknown> = (node: ts.Node) => R;
+
+export type SyntaxKindResult = {
+  post?: boolean;
+  traverse?: boolean;
+};
 
 export type VisitSyntaxKindFunction<N extends ts.Node = ts.Node> = (
   node: N,
-) => {
-  post?: boolean;
-  traverse?: boolean;
-} | void;
+) => SyntaxKindResult | void;
 
-export type Visitor = VisitorWithSpecificNodeTypes & VisitorWithGenericNodeType & VisitorAllNodes;
+export type Visitor<R = unknown> = VisitorWithSpecificNodeTypes &
+  VisitorWithGenericNodeType &
+  VisitorAllNodes<R>;
 
-type VisitorAllNodes = {
+type VisitorAllNodes<R = unknown> = {
   pre?: VisitorFunction;
-  post?: VisitorFunction;
+  post?: VisitorPostFunction<R>;
   traverse?: (rootNode: ts.Node, visit: (node: ts.Node) => unknown) => void;
 };
 

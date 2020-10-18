@@ -1,4 +1,4 @@
-import { visit, createFromString } from '../index';
+import { accept, createFromString } from '../index';
 import ts from 'typescript';
 
 const declarationFile = `
@@ -12,7 +12,7 @@ export interface Foo {
 const ast = createFromString(declarationFile);
 
 const tags = new Set<string>();
-visit(ast, {
+accept(ast, {
   [ts.SyntaxKind.DotDotDotToken]: () => {
     tags.add('dot-dot-dot-token');
   },

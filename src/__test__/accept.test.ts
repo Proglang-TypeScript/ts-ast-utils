@@ -1,7 +1,7 @@
 import { createFromString } from '../createFromString';
-import { visit } from '../visitAllChildren';
+import { accept } from '../accept';
 import ts from 'typescript';
-import { Visitor } from '../visitAllChildren/types';
+import { Visitor } from '../accept/types';
 
 describe('visitAllChildren', () => {
   it('Runs the visitor on all children', () => {
@@ -14,7 +14,7 @@ describe('visitAllChildren', () => {
       },
     };
 
-    visit(ast, visitorsMap);
+    accept(ast, visitorsMap);
 
     expect(nodes).toBe(9);
   });
@@ -29,7 +29,7 @@ describe('visitAllChildren', () => {
       },
     };
 
-    visit(ast, visitorsMap);
+    accept(ast, visitorsMap);
 
     expect(tags.has('string')).toBe(true);
   });

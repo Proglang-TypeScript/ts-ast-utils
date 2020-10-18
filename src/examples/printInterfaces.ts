@@ -1,4 +1,4 @@
-import { visit, createFromString } from '../index';
+import { accept, createFromString } from '../index';
 import ts from 'typescript';
 
 const declarationFile = `
@@ -19,7 +19,7 @@ export interface Baz {
 const ast = createFromString(declarationFile);
 
 const interfaces: { name: string; members: string[] }[] = [];
-visit(ast, {
+accept(ast, {
   [ts.SyntaxKind.InterfaceDeclaration]: (interfaceDeclaration) => {
     interfaces.push({
       name: interfaceDeclaration.name.escapedText.toString(),
