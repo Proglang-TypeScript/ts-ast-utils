@@ -1,2 +1,2 @@
-export * from './visitAllChildren';
+export * from './accept';
 export * from './createFromString';

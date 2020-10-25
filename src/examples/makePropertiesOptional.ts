@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import { accept, createFromString } from '../index';
 import ts from 'typescript';
+import { emit } from '../emit';
 
 const declarationFile = `
 export interface Foo {
@@ -18,21 +20,20 @@ export interface Baz {
 
 const ast = createFromString(declarationFile);
 
-const interfaces: { name: string; members: string[] }[] = [];
+console.log('Original interface:');
+console.log(emit(ast));
+
 accept(ast, {
   [ts.SyntaxKind.InterfaceDeclaration]: (interfaceDeclaration) => {
-    interfaces.push({
-      name: interfaceDeclaration.name.escapedText.toString(),
-      members: interfaceDeclaration.members.map((m) => m.name?.getText() || ''),
+    interfaceDeclaration.members.forEach((m) => {
+      m.questionToken = ts.createToken(ts.SyntaxKind.QuestionToken);
     });
 
     return { traverse: false };
   },
 });
 
-// eslint-disable-next-line no-console
-console.log(
-  `Declared interfaces: ${interfaces
-    .map((i) => `${i.name}: [${i.members.join(', ')}]`)
-    .join(', ')}`,
-);
+console.log('--------------');
+
+console.log('Modified interface:');
+console.log(emit(ast));
