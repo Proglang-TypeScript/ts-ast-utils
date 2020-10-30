@@ -5,9 +5,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "generate": "node dist/index.js",
-    "prestart": "npm run build",
-    "start": "node dist/index.js",
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "test": "jest",
