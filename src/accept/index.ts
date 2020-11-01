@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import { syntaxKindVisit } from './runSyntaxKindVisit';
+import { syntaxKindVisit } from './syntaxKindVisit';
 import { Visitor } from './types';
 
 export function accept<R = unknown>(node: ts.Node, visitor: Visitor<R>): R | undefined {
