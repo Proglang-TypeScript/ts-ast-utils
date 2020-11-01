@@ -1,5 +1,6 @@
 import ts from 'typescript';
-import { Visitor, SyntaxKindResult } from './types';
+import { syntaxKindVisit } from './runSyntaxKindVisit';
+import { Visitor } from './types';
 
 export function accept<R = unknown>(node: ts.Node, visitor: Visitor<R>): R | undefined {
   return visitWithVisitor<R>(visitor)(node);
@@ -10,11 +11,7 @@ const visitWithVisitor = <R = unknown>(visitor: Visitor<R>) => {
     const preVisit = visitor.pre;
     preVisit && preVisit(node);
 
-    const syntaxKindVisit = visitor[node.kind];
-    const syntaxKindVisitResult = parseSyntaxKindResult(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (syntaxKindVisit && syntaxKindVisit(node as any)) || {},
-    );
+    const syntaxKindVisitResult = syntaxKindVisit(node, visitor);
 
     if (syntaxKindVisitResult.traverse === true) {
       const traverseFn = visitor.traverse || defaultTraverse;
@@ -36,8 +33,3 @@ const visitWithVisitor = <R = unknown>(visitor: Visitor<R>) => {
 const defaultTraverse = (node: ts.Node, visit: (node: ts.Node) => unknown) => {
   ts.forEachChild(node, visit);
 };
-
-const parseSyntaxKindResult = (result: SyntaxKindResult) => ({
-  post: result.post ?? true,
-  traverse: result.traverse ?? true,
-});
