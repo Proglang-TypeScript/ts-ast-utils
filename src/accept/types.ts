@@ -27,6 +27,10 @@ type VisitorWithGenericNodeType = {
 };
 
 type VisitorWithSpecificNodeTypes = {
-  [ts.SyntaxKind.InterfaceDeclaration]?: VisitSyntaxKindFunction<ts.InterfaceDeclaration>;
+  [ts.SyntaxKind.InterfaceDeclaration]?: VisitSyntaxKindFunction<InterfaceDeclaration>;
   [ts.SyntaxKind.ArrayType]?: VisitSyntaxKindFunction<ts.ArrayTypeNode>;
 };
+
+interface InterfaceDeclaration extends Omit<ts.InterfaceDeclaration, 'members'> {
+  members: (ts.PropertySignature | ts.MethodSignature)[];
+}
