@@ -32,5 +32,11 @@ type VisitorWithSpecificNodeTypes = {
 };
 
 interface InterfaceDeclaration extends Omit<ts.InterfaceDeclaration, 'members'> {
-  members: (ts.PropertySignature | ts.MethodSignature)[];
+  members: (
+    | ts.PropertySignature
+    | ts.MethodSignature
+    | ts.CallSignatureDeclaration
+    | ts.ConstructSignatureDeclaration
+    | ts.IndexSignatureDeclaration
+  )[];
 }
