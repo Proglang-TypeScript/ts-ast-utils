@@ -19,6 +19,8 @@ Easily traverse the AST defining `pre`, `post` and syntax kind specific callback
 
 It lets you also define your own `traverse` function. By default, it will traverse the AST using `ts.forEachChild()` method.
 
+Check out the examples [here](src/examples).
+
 ### createFromString()
 
 Easily creates an AST from a string.
