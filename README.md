@@ -72,7 +72,7 @@ Check out more examples [here](src/examples).
 
 ### accept(node, visitor)
 
-Easily traverse the AST starting from `node`. Define a `visitor` object that allows you to run syntax specific callbacks, `pre` and `post` conditions and define a `traverse` method to control how to traverse the AST.
+Easily traverse the AST starting from `node`. Define a `visitor` object that allows you to run a `pre` condition, syntax kind specific callbacks and `post` conditions (in that order) on each node. You can also define your own `traverse` method to control how to traverse the AST.
 
 #### node
 
