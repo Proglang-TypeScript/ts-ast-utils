@@ -31,5 +31,9 @@ const visitWithVisitor = <R = unknown>(visitor: Visitor<R>) => {
 };
 
 const defaultTraverse = (node: ts.Node, visit: (node: ts.Node) => unknown) => {
-  ts.forEachChild(node, visit);
+  ts.forEachChild(node, (node: ts.Node) => {
+    // Avoid forwarding `visit` return value, as `ts.forEachChild()` stops
+    // iteration for a truthy value.
+    visit(node);
+  });
 };

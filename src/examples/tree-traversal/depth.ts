@@ -11,20 +11,26 @@ export interface Foo {
 
 const ast = createFromString(declarationFile);
 
-const depthVisitor = {
-  post: (node: ts.Node): number => {
-    const children = node.getChildren();
+const nodesDepth = new WeakMap<ts.Node, number>();
+const depth = accept(ast, {
+  post: (node: ts.Node) => {
+    const children: ts.Node[] = [];
+    ts.forEachChild(node, (child) => {
+      children.push(child);
+    });
+
     if (children.length === 0) {
-      return 1;
+      // Node has not been visited yet
+      nodesDepth.set(node, 1);
+    } else {
+      const childrenDepth = children.map((child) => +(nodesDepth.get(child) || 0));
+      const nodeDepth = 1 + Math.max(...childrenDepth);
+      nodesDepth.set(node, nodeDepth);
     }
 
-    const depthsOfChildren = children.map((child) => +(accept(child, depthVisitor) || 0));
-
-    return 1 + Math.max(...depthsOfChildren);
+    return nodesDepth.get(node) || 0;
   },
-};
-
-const depth = accept(ast, depthVisitor);
+});
 
 // eslint-disable-next-line no-console
 console.log(`The depth of the AST is: ${depth}`);
