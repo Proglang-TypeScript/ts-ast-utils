@@ -2,7 +2,7 @@ import { accept, createFromString } from '../../index';
 import ts from 'typescript';
 
 const declarationFile = `
-export function f(a: string, ...b: number[]): void;
+export function f(a: string, ...b: (string | number)[]): void;
 
 export interface Foo {
     a?: string;
@@ -11,26 +11,22 @@ export interface Foo {
 
 const ast = createFromString(declarationFile);
 
-const nodesDepth = new WeakMap<ts.Node, number>();
-const depth = accept(ast, {
-  post: (node: ts.Node) => {
-    const children: ts.Node[] = [];
-    ts.forEachChild(node, (child) => {
-      children.push(child);
+const depthVisitor = {
+  nodesDepth: new WeakMap<ts.Node, number>(),
+  depth: 0,
+  traverse: function (node: ts.Node, visit: (n: ts.Node) => unknown) {
+    const depthNode = this.nodesDepth.get(node) || 0;
+
+    this.depth = Math.max(this.depth, depthNode);
+
+    ts.forEachChild(node, (child: ts.Node) => {
+      this.nodesDepth.set(child, depthNode + 1);
+      visit(child);
     });
-
-    if (children.length === 0) {
-      // Node has not been visited yet
-      nodesDepth.set(node, 1);
-    } else {
-      const childrenDepth = children.map((child) => +(nodesDepth.get(child) || 0));
-      const nodeDepth = 1 + Math.max(...childrenDepth);
-      nodesDepth.set(node, nodeDepth);
-    }
-
-    return nodesDepth.get(node) || 0;
   },
-});
+};
+
+accept(ast, depthVisitor);
 
 // eslint-disable-next-line no-console
-console.log(`The depth of the AST is: ${depth}`);
+console.log(`The depth of the AST is: ${depthVisitor.depth}`);
