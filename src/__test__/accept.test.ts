@@ -1,4 +1,4 @@
-import { createFromString } from '../createFromString';
+import { createFromString } from '../create';
 import { accept } from '../accept';
 import ts from 'typescript';
 import { Visitor } from '../accept/types';
