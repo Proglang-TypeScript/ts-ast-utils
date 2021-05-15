@@ -20,6 +20,7 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - run: npm ci
-      - run: npm run release -- ${{ github.event.inputs.version }} --no-npm
+      - run: npm run release -- ${{ github.event.inputs.version }} --github.release=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
