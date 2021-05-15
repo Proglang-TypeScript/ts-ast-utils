@@ -1,6 +1,6 @@
 {
   "name": "@proglang/ts-ast-utils",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Utilities for TypeScript AST traversals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,7 @@
     "prettier": "prettier --write 'src/**/*.ts'",
     "script": "ts-node",
     "prepublishOnly": "npm run build",
-    "package:local": "npm run build && npm pack && mkdir -p packages.local && mv ./proglang-ts-ast-utils*.tgz packages.local/",
-    "release": "release-it"
+    "package:local": "npm run build && npm pack && mkdir -p packages.local && mv ./proglang-ts-ast-utils*.tgz packages.local/"
   },
   "husky": {
     "hooks": {
@@ -50,7 +49,6 @@
     "jest": "^26.5.2",
     "prettier": "^2.1.2",
     "pretty-quick": "^3.0.2",
-    "release-it": "^14.6.2",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0"
   }
