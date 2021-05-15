@@ -13,7 +13,8 @@
     "prettier": "prettier --write 'src/**/*.ts'",
     "script": "ts-node",
     "prepublishOnly": "npm run build",
-    "package:local": "npm run build && npm pack && mkdir -p packages.local && mv ./proglang-ts-ast-utils*.tgz packages.local/"
+    "package:local": "npm run build && npm pack && mkdir -p packages.local && mv ./proglang-ts-ast-utils*.tgz packages.local/",
+    "release": "release-it"
   },
   "husky": {
     "hooks": {
