@@ -1,6 +1,6 @@
 {
   "name": "@proglang/ts-ast-utils",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Utilities for TypeScript AST traversals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
