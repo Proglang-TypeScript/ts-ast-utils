@@ -37,7 +37,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "dependencies": {
+  "peerDependencies": {
     "typescript": "^4.0.0 || ^3.9.7"
   },
   "devDependencies": {
@@ -52,6 +52,7 @@
     "pretty-quick": "^3.1.2",
     "release-it": "^14.11.8",
     "ts-jest": "^26.4.1",
-    "ts-node": "^9.0.0"
+    "ts-node": "^9.0.0",
+    "typescript": "^4.5.3"
   }
 }
