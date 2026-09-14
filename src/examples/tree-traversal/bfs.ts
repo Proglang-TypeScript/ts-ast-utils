@@ -18,7 +18,7 @@ const bfsTraverse = (node: ts.Node, visit: (n: ts.Node) => unknown) => {
   });
 
   const last = queue.shift();
-  last && visit(last);
+  if (last) visit(last);
 };
 
 accept(ast, {

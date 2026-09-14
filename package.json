@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "tsc",
+    "build": "node node_modules/typescript/lib/tsc.js",
     "test": "jest",
     "test:clear-cache": "jest --clearCache",
     "lint": "eslint --max-warnings 0 'src/**/*.ts'",
@@ -15,12 +15,6 @@
     "prepublishOnly": "npm run build",
     "package:local": "npm run build && npm pack && mkdir -p packages.local && mv ./proglang-ts-ast-utils*.tgz packages.local/",
     "release": "release-it"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged",
-      "pre-push": "npm run lint"
-    }
   },
   "keywords": [
     "typescript",
@@ -38,21 +32,28 @@
     "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
-    "typescript": "^3.9.7"
+    "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "husky": "^7.0.4",
-    "jest": "^26.5.2",
-    "prettier": "^2.5.1",
-    "pretty-quick": "^3.1.2",
-    "release-it": "^14.11.8",
-    "ts-jest": "^26.4.1",
-    "ts-node": "^9.0.0",
-    "typescript": "^3.9.7"
+    "@types/jest": "30.0.0",
+    "@types/node": "24.13.4",
+    "@typescript-eslint/eslint-plugin": "8.70.0",
+    "@typescript-eslint/parser": "8.70.0",
+    "eslint": "10.10.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.6",
+    "husky": "9.1.7",
+    "jest": "30.5.1",
+    "prettier": "3.9.6",
+    "pretty-quick": "4.2.2",
+    "release-it": "21.0.3",
+    "ts-jest": "29.4.12",
+    "ts-node": "10.9.2",
+    "typescript": "6.0.3",
+    "globals": "17.12.0",
+    "@eslint/js": "10.0.1"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }

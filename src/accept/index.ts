@@ -9,7 +9,7 @@ export function accept<R = unknown>(node: ts.Node, visitor: Visitor<R>): R | und
 const visitWithVisitor = <R = unknown>(visitor: Visitor<R>) => {
   const visit = (node: ts.Node) => {
     const preVisit = visitor.pre;
-    preVisit && preVisit(node);
+    if (preVisit) preVisit(node);
 
     const syntaxKindVisitResult = syntaxKindVisit(node, visitor);
 

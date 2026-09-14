@@ -21,7 +21,7 @@ accept(ast, {
   },
   [ts.SyntaxKind.ArrayType]: (node) => {
     tags.add('array');
-    node.elementType.kind === ts.SyntaxKind.NumberKeyword && tags.add('array-number');
+    if (node.elementType.kind === ts.SyntaxKind.NumberKeyword) tags.add('array-number');
   },
 });
 
